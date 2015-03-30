@@ -4,12 +4,16 @@
     var DEFAULT_ROUTE = 'one';
 
     var template = document.querySelector('#t');
+    var navTabs = document.querySelector('#t /deep/ #paper-tabs');
 
     template.pages = [
         {name: 'Wall', hash: 'wall'},
         {name: 'User', hash: 'profile'},
         {name: 'Tag', hash: 'tag'}
     ];
+
+
+
 
     template.addEventListener('template-bound', function (e) {
         var keys = document.querySelector('#keys');

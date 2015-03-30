@@ -1,0 +1,90 @@
+
+<polymer-element name="twittargh-toolbar">
+
+    <template>
+        <style>
+            core-toolbar {
+                background-color: #2a2a2a;
+                color: #fff;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            paper-tabs {
+                height: 100%;
+                font-size: 20px;
+            }
+
+            paper-tabs paper-tab {
+                cursor: pointer;
+            }
+
+            paper-tabs::shadow #selectionBar {
+                background-color: #FF1929;
+                height: 4px;
+            }
+
+            paper-tabs paper-tab::shadow #ink {
+                color: #FF1929;
+            }
+
+            paper-tabs core-icon {
+                fill: white;
+            }
+
+            .username {
+                margin-left: 10px;
+                font-size: 22px;
+            }
+
+            .lastname {
+                color: #FF1929;
+                font-weight: bold;
+            }
+        </style>
+
+        <core-toolbar flex center-center>
+            <core-toolbar>
+                Twitt<span style="margin: 0px; color: #FF1929; font-weight: bold;">argh !</span>
+            </core-toolbar>
+
+            <paper-tabs flex="33" self-end>
+                <template repeat="{{page, i in pages}}">
+                    <paper-tab hash="page.hash">
+                        <core-icon icon="{{page.icon}}"></core-icon>
+                        {{page.name}}
+                    </paper-tab>
+                </template>
+            </paper-tabs>
+
+            <div flex>
+            </div>
+
+            <div layout horizontal center-center>
+                <div class="username" flex>
+                    Martin&nbsp;<span class="lastname">DEQUATREMARE</span>
+                </div>
+                <paper-icon-button icon="exit-to-app"></paper-icon-button>
+            </div>
+        </core-toolbar>
+    </template>
+
+    <script>
+        Polymer('twittargh-toolbar', {
+            pages: [
+                {name: 'Wall', hash: 'wall', icon: 'home'},
+                {name: 'User', hash: 'profile', icon: 'person'},
+                {name: 'Tag', hash: 'tag', icon: 'bookmark'}
+            ],
+
+            ready: function () {
+                var navTabs = this.shadowRoot.querySelector('paper-tabs');
+
+                navTabs.addEventListener('core-select', function () {
+                    window.location.hash = this.pages[navTabs.selected].hash;
+                }.bind(this));
+            }
+        });
+    </script>
+
+</polymer-element>

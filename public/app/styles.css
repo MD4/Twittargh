@@ -1,44 +1,7 @@
-body {
-    font-family: "RobotoDraft";
-    font-weight: 300;
-}
 
-core-animated-pages {
-    width: 85%;
-    height: 85%;
-    -webkit-user-select: none;
-    overflow: hidden;
-}
 
-core-animated-pages > * {
-    border-radius: 5px;
-    font-size: 50px;
-    background-color: white;
-}
 
-body /deep/ core-toolbar {
-    background-color: #3b3b3b;
-    color: #fff;
-    margin: 0px;
-    padding: 0px;
-}
 
-core-toolbar paper-tabs {
-    height: 100%;
-    font-size: 20px;
-}
-
-paper-tabs paper-tab {
-    cursor: pointer;
-}
-
-paper-tabs::shadow #selectionBar {
-    background-color: #FF1929;
-}
-
-paper-tabs paper-tab::shadow #ink {
-    color: #FF1929;
-}
 
 
 @media all and (max-width: 480px) {

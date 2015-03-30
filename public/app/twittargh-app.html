@@ -1,0 +1,67 @@
+<link rel="import" href="lib/core-elements/core-elements.html">
+
+<link rel="import" href="lib/core-animated-pages/transitions/slide-from-right.html">
+<link rel="import" href="lib/paper-item/paper-item.html">
+<link rel="import" href="lib/paper-tabs/paper-tabs.html">
+<link rel="import" href="lib/flatiron-director/flatiron-director.html">
+<link rel="import" href="lib/font-roboto/roboto.html">
+
+<link rel="import" href="twittargh-toolbar.html">
+
+<polymer-element name="twittargh-app" vertical layout>
+    <template>
+
+        <style>
+            * {
+                font-family: "RobotoDraft";
+                font-weight: 300;
+            }
+
+            core-animated-pages {
+                -webkit-user-select: none;
+                overflow: hidden;
+            }
+
+            core-animated-pages > * {
+                border-radius: 5px;
+                font-size: 50px;
+            }
+
+            .section-content {
+                background-color: white;
+                width: 80%;
+                margin-left: 10%;
+            }
+
+        </style>
+
+        <flatiron-director route="{{route}}" autoHash></flatiron-director>
+
+        <core-animated-pages layout horizontal fit
+                             id="pages" selected="{{route}}" valueattr="hash"
+                             transitions="slide-from-right">
+            <template repeat="{{page, i in pages}}">
+                <section hash="{{page.hash}}" layout horizontal fit>
+                    <div class="section-content">
+                        <h1>{{page.name}}</h1>
+                    </div>
+                </section>
+            </template>
+        </core-animated-pages>
+
+        <twittargh-toolbar tool></twittargh-toolbar>
+
+    </template>
+
+    <script>
+
+        Polymer('twittargh-app', {
+            pages: [
+                {name: 'Wall', hash: 'wall'},
+                {name: 'User', hash: 'profile'},
+                {name: 'Tag', hash: 'tag'}
+            ]
+        });
+    </script>
+
+</polymer-element>
