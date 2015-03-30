@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>Single page app using Polymer</title>
+    <script src="lib/webcomponentsjs/webcomponents.js"></script>
+    <!-- vulcanized version of imported elements --
+         see "elements.html" for unvulcanized list of imports. -->
+
+    <link rel="import" href="lib/core-elements/core-elements.html">
+
+    <link rel="import" href="lib/core-animated-pages/transitions/slide-from-right.html">
+    <link rel="import" href="lib/paper-item/paper-item.html">
+    <link rel="import" href="lib/paper-tabs/paper-tabs.html">
+    <link rel="import" href="lib/flatiron-director/flatiron-director.html">
+    <link rel="import" href="lib/font-roboto/roboto.html">
+
+    <link rel="stylesheet" href="styles.css" shim-shadowdom>
+</head>
+<body unresolved fullbleed>
+
+<template is="auto-binding" id="t">
+
+    <!-- Route controller. -->
+    <flatiron-director route="{{route}}" autoHash></flatiron-director>
+
+    <div layout horizontal center-center fit>
+        <core-animated-pages id="pages" selected="{{route}}" valueattr="hash"
+                             transitions="slide-from-right"
+                             on-tap="{{cyclePages}}">
+            <template repeat="{{page, i in pages}}">
+                <section hash="{{page.hash}}" layout vertical center-center>
+                    <div>{{page.name}}</div>
+                </section>
+            </template>
+        </core-animated-pages>
+    </div>
+
+    <core-toolbar tool flex center-center fit>
+        <core-toolbar>
+            Twitt<span style="margin: 0px; color: #FF1929; font-weight: bold;">argh !</span>
+        </core-toolbar>
+
+        <paper-tabs flex="33" self-end>
+            <template repeat="{{page, i in pages}}">
+                <paper-tab>{{page.name}}</paper-tab>
+            </template>
+        </paper-tabs>
+
+        <div flex>
+
+        </div>
+
+        <paper-icon-button icon="exit-to-app"></paper-icon-button>
+    </core-toolbar>
+
+</template>
+
+<script src="app.js"></script>
+
+</body>
+</html>

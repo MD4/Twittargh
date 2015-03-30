@@ -1,0 +1,31 @@
+{
+  "name": "Twittargh",
+  "version": "0.0.1",
+  "description": "Small twitter clone !",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "node app/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MD4/Twittargh.git"
+  },
+  "keywords": [
+    "clone",
+    "twitter",
+    "argh"
+  ],
+  "author": "Martin DEQUATREMARE",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MD4/Twittargh/issues"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "express": "^4.12.3"
+  },
+  "devDependencies": {
+    "grunt-vulcanize": "^0.6.4"
+  }
+}
