@@ -12,24 +12,25 @@ var Async = require('async'),
 /**
  * GET /auth
  */
-module.exports.getPrincipal = function (req, res, callback) {
-    AuthenticationService.getPrincipal(req.session, callback);
+module.exports.getAuthentication = function (req, res, callback) {
+    AuthenticationService.getAuthentication(req.session, callback);
 };
 
 /**
- * POST /signin
+ * GET /signin
  */
 module.exports.signIn = function (req, res, callback) {
-    var data = req.body;
+    var data = req.query;
 
     Async.waterfall([
         function (cb) {
-            var login = data.username;
+            var username = data.username;
             var password = data.password;
-            AuthenticationService.signIn(req.session, login, password, cb);
+
+            AuthenticationService.signIn(req.session, username, password, cb);
         }
-    ], function (err, principal) {
-        callback(err, principal);
+    ], function (err, user) {
+        callback(err, user);
     });
 };
 

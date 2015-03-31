@@ -4,6 +4,7 @@ var configServer = require('./config/server.json'),
     Server = require('./core/Server.class.js');
 
 var server = new Server(configServer, configDB);
+
 server.route(configRoutes);
 
 server.start();

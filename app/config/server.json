@@ -1,6 +1,6 @@
 {
   "host": "http://127.0.0.1",
   "root": "/",
-  "apiRoot": "/api/",
+  "apiRoot": "/api",
   "port": 3000
 }

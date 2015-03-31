@@ -32,6 +32,8 @@ var Server = function (serverSettings, dbSettings) {
 
     server.use(server.router);
 
+    server.use(express.static(__dirname + '/../../public/app'));
+
     this.server = server;
 };
 
@@ -49,10 +51,11 @@ Server.prototype.route = function (routes) {
 
     routes.forEach(function (route) {
         var controller = require('../controllers/' + route.controller);
-        this.server[route.method](route.url, function (req, res) {
-            controller[this.settings.apiRoot + route.functionName](req, res, function (err, result) {
+        this.server[route.method](this.settings.apiRoot + route.url, function (req, res) {
+            controller[route.functionName](req, res, function (err, result) {
                 if (err) {
                     res.statusCode = err.code;
+                    console.log(err);
                     res.send(err);
                 } else {
                     res.statusCode = 200;
