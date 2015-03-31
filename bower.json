@@ -28,5 +28,26 @@
     "font-roboto": "Polymer/font-roboto#master",
     "paper-item": "Polymer/paper-item#master",
     "paper-tabs": "Polymer/paper-tabs#~0.5.5"
+  },
+  "resolutions": {
+    "core-media-query": "master",
+    "polymer": "master",
+    "core-toolbar": "master",
+    "core-resizable": "master",
+    "paper-ripple": "master",
+    "core-selector": "master",
+    "core-icons": "master",
+    "paper-button": "master",
+    "core-icon": "master",
+    "paper-shadow": "master",
+    "core-icon-button": "master",
+    "core-selection": "master",
+    "core-iconset-svg": "master",
+    "core-component-page": "master",
+    "core-focusable": "master",
+    "core-a11y-keys": "master",
+    "webcomponentsjs": "master",
+    "core-meta": "master",
+    "core-iconset": "master"
   }
 }

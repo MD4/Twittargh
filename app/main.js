@@ -1,6 +1,9 @@
-var express = require('express');
-var app = express();
+var configServer = require('./config/server.json'),
+    configDB = require('./config/database.json'),
+    configRoutes = require('./config/routes.json'),
+    Server = require('./core/Server.class.js');
 
-app.use(express.static(__dirname + '/../public/app'));
-console.log(__dirname + '/../public/app');
-app.listen(3000);
+var server = new Server(configServer, configDB);
+server.route(configRoutes);
+
+server.start();
