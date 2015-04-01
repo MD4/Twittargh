@@ -16,3 +16,7 @@ module.exports.AuthenticationError = function() {
 module.exports.NotFoundError = function() {
     return new TwittarghError("Not found", 404);
 }
+
+module.exports.BadRequestError = function() {
+    return new TwittarghError("Bad request", 400);
+}

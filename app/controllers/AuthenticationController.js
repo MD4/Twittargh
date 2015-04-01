@@ -1,4 +1,5 @@
 var Async = require('async'),
+    Errors = require('../utils/errors/Errors'),
     AuthenticationService = require('../services/AuthenticationService');
 
 // **************************

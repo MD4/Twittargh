@@ -30,5 +30,18 @@
     "method": "post",
     "controller": "TweetController",
     "functionName": "postTweet"
+  },
+
+  {
+    "url": "/users/:username",
+    "method": "get",
+    "controller": "UserController",
+    "functionName": "getUser"
+  },
+  {
+    "url": "/users/:username/follow",
+    "method": "post",
+    "controller": "UserController",
+    "functionName": "follow"
   }
 ]

@@ -40,6 +40,8 @@ module.exports.signIn = function (session, username, password, callback) {
     }
 
     UserService.findOne(username, function (err, user) {
+        console.log(username, user);
+
         if (err) return callback(err);
         if (!user) return callback(new Errors.AuthenticationError());
 

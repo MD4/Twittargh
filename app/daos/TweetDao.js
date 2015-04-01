@@ -54,9 +54,12 @@ module.exports.findUserTweets = function (username, callback, start, end) {
 // zadd tweets:users:mdequatr UID 2378621302
 module.exports.save = function (tweet, callback) {
     var tweetId = uuid.v4();
+
+    if (!tweet.content)
+        return callback(null, new Errors.BadRequestError());
+
     async.series([
         function (cb) {
-            console.log(tweet.date.getTime());
             redis.zadd(
                 redis.getKey(tweetsUsersPath, tweet.user),
                 tweet.date.getTime(),
@@ -71,7 +74,7 @@ module.exports.save = function (tweet, callback) {
                 cb
             );
         }.bind(this)
-    ], function (err, result) {
-        callback(err, result);
+    ], function (err) {
+        callback(err, null);
     });
 };

@@ -17,8 +17,11 @@ var Async = require('async'),
 module.exports.getTweetsForUser = function (req, res, callback) {
     if (!AuthenticationService.isAuthenticated(req.session))
         return callback(new Errors.AuthenticationError());
+
     var data = req.params;
-    TweetService.findUserTweets(data.username, callback);
+    var params = req.query;
+
+    TweetService.findUserTweets(data.username, callback, params.start, params.end);
 };
 
 /**
