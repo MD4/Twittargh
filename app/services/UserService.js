@@ -1,6 +1,6 @@
 var Async = require('async'),
     UserDao = require('../daos/UserDao');
 
-module.exports.find = function (username, callback) {
-    UserDao.find(username, callback);
+module.exports.findOne = function (username, callback) {
+    UserDao.findOne(username, callback);
 };

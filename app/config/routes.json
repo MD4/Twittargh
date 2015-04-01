@@ -4,5 +4,31 @@
     "method": "get",
     "controller": "AuthenticationController",
     "functionName": "signIn"
+  },
+  {
+    "url": "/signOut",
+    "method": "get",
+    "controller": "AuthenticationController",
+    "functionName": "signOut"
+  },
+  {
+    "url": "/getAuthentication",
+    "method": "get",
+    "controller": "AuthenticationController",
+    "functionName": "getAuthentication"
+  },
+
+
+  {
+    "url": "/tweets/:username",
+    "method": "get",
+    "controller": "TweetController",
+    "functionName": "getTweetsForUser"
+  },
+  {
+    "url": "/tweets",
+    "method": "post",
+    "controller": "TweetController",
+    "functionName": "postTweet"
   }
 ]

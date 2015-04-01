@@ -3,7 +3,7 @@ var redis = require('../utils/helpers/RedisHelper'),
 
 var userPath = module.exports.path = ["users"];
 
-module.exports.find = function (username, callback) {
+module.exports.findOne = function (username, callback) {
     redis.hgetall(redis.getKey(userPath, username), function (err, user) {
         if (err) {
             return callback(new Errors.InternalError());

@@ -10,6 +10,7 @@ var authenticationFilter = ["username", "firstname", "lastname"];
 // **************************
 
 var getAuthentication = function (session) {
+    if (!session.authentication) return null;
     return ModelFilter.include(session.authentication, authenticationFilter);
 };
 
@@ -29,7 +30,8 @@ var killSession = function (session) {
 
 module.exports.getAuthentication = function (session, callback) {
     var authentication = getAuthentication(session);
-    callback(null, authentication);
+    callback && callback(null, authentication);
+    return authentication;
 };
 
 module.exports.signIn = function (session, username, password, callback) {
@@ -37,7 +39,7 @@ module.exports.signIn = function (session, username, password, callback) {
         killSession(session);
     }
 
-    UserService.find(username, function (err, user) {
+    UserService.findOne(username, function (err, user) {
         if (err) return callback(err);
         if (!user) return callback(new Errors.AuthenticationError());
 
@@ -51,4 +53,8 @@ module.exports.signIn = function (session, username, password, callback) {
 module.exports.signOut = function (session, callback) {
     killSession(session);
     callback();
+};
+
+module.exports.isAuthenticated = function(session) {
+    return !!getAuthentication(session);
 };

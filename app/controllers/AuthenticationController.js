@@ -38,5 +38,8 @@ module.exports.signIn = function (req, res, callback) {
  * POST /signout
  */
 module.exports.signOut = function (req, res, callback) {
+    if (!AuthenticationService.isAuthenticated(req.session))
+        return callback(new Errors.AuthenticationError());
+
     AuthenticationService.signOut(req.session, callback);
 };
