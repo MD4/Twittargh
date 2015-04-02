@@ -1,10 +1,9 @@
 var async = require('async'),
     redis = require('../utils/helpers/RedisHelper'),
-    Errors = require('../utils/errors/Errors'),
-    uuid = require('node-uuid');
+    Errors = require('../utils/errors/Errors');
 
-var tweetsDataPath = module.exports.path = ["tweets", "data"];
-var tweetsUsersPath = module.exports.path = ["tweets", "users"];
+var tweetsDataPath = module.exports.dataPath = ["tweets", "data"];
+var tweetsUsersPath = module.exports.usersPath = ["tweets", "users"];
 
 module.exports.findOne = function (id, callback) {
     redis.hgetall(redis.getKey(tweetsDataPath, id), function (err, tweet) {
@@ -53,28 +52,30 @@ module.exports.findUserTweets = function (username, callback, start, end) {
 // hmset tweets:data:UID content "Hey !"
 // zadd tweets:users:mdequatr UID 2378621302
 module.exports.save = function (tweet, callback) {
-    var tweetId = uuid.v4();
-
-    if (!tweet.content)
+    if (!tweet || !tweet.content)
         return callback(null, new Errors.BadRequestError());
 
     async.series([
         function (cb) {
             redis.zadd(
-                redis.getKey(tweetsUsersPath, tweet.user),
+                redis.getKey(tweetsUsersPath, tweet.username),
                 tweet.date.getTime(),
-                tweetId,
-                cb
+                tweet.id,
+                function(err) {
+                    cb(err ? new Errors.InternalError() : null);
+                }
             );
         }.bind(this),
         function (cb) {
             redis.hmset(
-                redis.getKey(tweetsDataPath, tweetId),
+                redis.getKey(tweetsDataPath, tweet.id),
                 tweet,
-                cb
+                function(err) {
+                    cb(err ? new Errors.InternalError() : null);
+                }
             );
         }.bind(this)
     ], function (err) {
-        callback(err, null);
+        callback(err);
     });
 };

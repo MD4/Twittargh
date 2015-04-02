@@ -1,0 +1,15 @@
+<polymer-element name="twittargh-globals">
+    <script>
+        (function () {
+            var values = {};
+            Polymer('twittargh-globals', {
+                created: function () {
+                    this.values = values;
+                },
+                dataChanged: function () {
+                    this.values.data = this.data;
+                }
+            });
+        })();
+    </script>
+</polymer-element>

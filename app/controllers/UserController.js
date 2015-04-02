@@ -20,6 +20,7 @@ var userFilter = ["username", "firstname", "lastname", "following", "followers"]
 module.exports.getUser = function (req, res, callback) {
     if (!AuthenticationService.isAuthenticated(req.session))
         return callback(new Errors.AuthenticationError());
+
     var data = req.params;
 
     UserService.findOne(data.username, function (err, user) {
@@ -32,11 +33,49 @@ module.exports.getUser = function (req, res, callback) {
  * POST /users/:username/follow
  */
 module.exports.follow = function (req, res, callback) {
-    var user = AuthenticationService.getAuthentication(req.session),
+    var authentication = AuthenticationService.getAuthentication(req.session),
         data = req.params;
 
-    if (!user)
+    if (!authentication)
         return callback(new Errors.AuthenticationError());
 
-    UserService.follow(user.username, data.username, callback);
+    UserService.follow(authentication.username, data.username, callback);
+};
+
+
+/**
+ * POST /users/:username/unfollow
+ */
+module.exports.unfollow = function (req, res, callback) {
+    var authentication = AuthenticationService.getAuthentication(req.session),
+        data = req.params;
+
+    if (!authentication)
+        return callback(new Errors.AuthenticationError());
+
+    UserService.unfollow(authentication.username, data.username, callback);
+};
+
+/**
+ * GET /users/:username/followers
+ */
+module.exports.getFollowers = function(req, res, callback) {
+    if (!AuthenticationService.isAuthenticated(req.session))
+        return callback(new Errors.AuthenticationError());
+
+    var data = req.params;
+
+    UserService.getFollowers(data.username, callback);
+};
+
+/**
+ * GET /users/:username/following
+ */
+module.exports.getFollowing = function(req, res, callback) {
+    if (!AuthenticationService.isAuthenticated(req.session))
+        return callback(new Errors.AuthenticationError());
+
+    var data = req.params;
+
+    UserService.getFollowing(data.username, callback);
 };

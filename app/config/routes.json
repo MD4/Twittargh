@@ -43,5 +43,32 @@
     "method": "post",
     "controller": "UserController",
     "functionName": "follow"
+  },
+  {
+    "url": "/users/:username/unfollow",
+    "method": "post",
+    "controller": "UserController",
+    "functionName": "unfollow"
+  },
+
+  {
+    "url": "/users/:username/followers",
+    "method": "get",
+    "controller": "UserController",
+    "functionName": "getFollowers"
+  },
+  {
+    "url": "/users/:username/following",
+    "method": "get",
+    "controller": "UserController",
+    "functionName": "getFollowing"
+  },
+
+
+  {
+    "url": "/wall",
+    "method": "get",
+    "controller": "WallController",
+    "functionName": "getWall"
   }
 ]

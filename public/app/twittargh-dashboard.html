@@ -1,0 +1,51 @@
+
+<polymer-element name="twittargh-dashboard">
+
+    <template>
+        <style>
+            core-animated-pages {
+                -webkit-user-select: none;
+                overflow: hidden;
+            }
+
+            core-animated-pages > * {
+                border-radius: 5px;
+                font-size: 50px;
+            }
+
+            .section-content {
+                background-color: white;
+                width: 80%;
+                margin-left: 10%;
+            }
+        </style>
+
+        <flatiron-director route="{{route}}" autoHash></flatiron-director>
+
+        <core-animated-pages layout horizontal fit
+                             id="pages"
+                             selected="{{route}}"
+                             valueattr="hash"
+                             transitions="slide-from-right">
+            <template repeat="{{page, i in pages}}">
+                <section hash="{{page.hash}}" layout horizontal fit>
+                    <div class="section-content">
+                        <h1>{{page.name}}</h1>
+                    </div>
+                </section>
+            </template>
+        </core-animated-pages>
+    </template>
+
+    <script>
+
+        Polymer('twittargh-dashboard', {
+            pages: [
+                {name: 'Wall', hash: 'wall'},
+                {name: 'User', hash: 'profile'},
+                {name: 'Tag', hash: 'tag'}
+            ]
+        });
+    </script>
+
+</polymer-element>

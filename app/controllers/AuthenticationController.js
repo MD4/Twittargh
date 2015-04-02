@@ -1,4 +1,4 @@
-var Async = require('async'),
+var async = require('async'),
     Errors = require('../utils/errors/Errors'),
     AuthenticationService = require('../services/AuthenticationService');
 
@@ -14,6 +14,9 @@ var Async = require('async'),
  * GET /auth
  */
 module.exports.getAuthentication = function (req, res, callback) {
+    if (!AuthenticationService.isAuthenticated(req.session))
+        return callback(new Errors.AuthenticationError());
+
     AuthenticationService.getAuthentication(req.session, callback);
 };
 
@@ -23,16 +26,14 @@ module.exports.getAuthentication = function (req, res, callback) {
 module.exports.signIn = function (req, res, callback) {
     var data = req.query;
 
-    Async.waterfall([
+    async.waterfall([
         function (cb) {
             var username = data.username;
             var password = data.password;
 
             AuthenticationService.signIn(req.session, username, password, cb);
         }
-    ], function (err, user) {
-        callback(err, user);
-    });
+    ], callback);
 };
 
 /**

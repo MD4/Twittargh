@@ -1,5 +1,4 @@
-var Async = require('async'),
-    AuthenticationService = require('../services/AuthenticationService'),
+var AuthenticationService = require('../services/AuthenticationService'),
     TweetService = require('../services/TweetService'),
     Errors = require('../utils/errors/Errors');
 
@@ -12,7 +11,20 @@ var Async = require('async'),
 // **************************
 
 /**
- * GET /tweets/:userid
+ * GET /tweets/:username
+ */
+module.exports.getTweetsForUser = function (req, res, callback) {
+    if (!AuthenticationService.isAuthenticated(req.session))
+        return callback(new Errors.AuthenticationError());
+
+    var data = req.params;
+    var params = req.query;
+
+    TweetService.findUserTweets(data.username, callback, params.start, params.end);
+};
+
+/**
+ * GET /tweets/:username
  */
 module.exports.getTweetsForUser = function (req, res, callback) {
     if (!AuthenticationService.isAuthenticated(req.session))
@@ -28,12 +40,12 @@ module.exports.getTweetsForUser = function (req, res, callback) {
  * POST /tweets
  */
 module.exports.postTweet = function (req, res, callback) {
-    var user = AuthenticationService.getAuthentication(req.session);
+    var authentication = AuthenticationService.getAuthentication(req.session);
 
-    if (!user)
+    if (!authentication)
         return callback(new Errors.AuthenticationError());
 
     var tweetData = req.body;
 
-    TweetService.createTweet(user, tweetData, callback);
+    TweetService.createTweet(authentication.username, tweetData, callback);
 };

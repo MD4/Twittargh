@@ -1,0 +1,34 @@
+<polymer-element name="twittargh-sign-in">
+
+    <template>
+        <style>
+            #sign-in-form {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -200px;
+                margin-top: -150px;
+                width: 400px;
+                height: 300px;
+            }
+        </style>
+
+        <twittargh-globals id="globals"></twittargh-globals>
+
+        <paper-shadow id="sign-in-form" class="card" z="3">
+
+        </paper-shadow>
+
+    </template>
+
+    <script>
+        Polymer('twittargh-sign-in', {
+            log: function () {
+                console.log(this.$.globals.values.user);
+                this.$.globals.values.user = true;
+                console.log(this.$.globals.values.user);
+            }
+        });
+    </script>
+
+</polymer-element>

@@ -10,7 +10,7 @@ module.exports.InternalError = function() {
 }
 
 module.exports.AuthenticationError = function() {
-    return new TwittarghError("Authentication error", 404);
+    return new TwittarghError("Authentication error", 401);
 }
 
 module.exports.NotFoundError = function() {
@@ -19,4 +19,8 @@ module.exports.NotFoundError = function() {
 
 module.exports.BadRequestError = function() {
     return new TwittarghError("Bad request", 400);
+}
+
+module.exports.ForbiddenError = function() {
+    return new TwittarghError("Forbidden", 403);
 }

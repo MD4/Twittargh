@@ -5,6 +5,9 @@
 <link rel="import" href="lib/paper-tabs/paper-tabs.html">
 <link rel="import" href="lib/flatiron-director/flatiron-director.html">
 <link rel="import" href="lib/font-roboto/roboto.html">
+<link rel="import" href="lib/paper-shadow/paper-shadow.html">
+
+<link rel="import" href="lib/core-ajax/core-ajax.html">
 
 <link rel="import" href="lib/core-icon/core-icon.html">
 
@@ -12,61 +15,59 @@
 <link rel="import" href="lib/core-icons/core-icons.html">
 
 <link rel="import" href="twittargh-toolbar.html">
+<link rel="import" href="twittargh-dashboard.html">
+<link rel="import" href="twittargh-sign-in.html">
+<link rel="import" href="twittargh-globals.html">
 
 <polymer-element name="twittargh-app" vertical layout>
     <template>
 
-        <style>
-            * {
-                font-family: "RobotoDraft";
-                font-weight: 300;
-            }
+        <twittargh-globals id="globals"></twittargh-globals>
 
-            core-animated-pages {
-                -webkit-user-select: none;
-                overflow: hidden;
-            }
+        <template if="{{!$.globals.values.user}}" id="disconnected-view">
+            <twittargh-sign-in></twittargh-sign-in>
+        </template>
 
-            core-animated-pages > * {
-                border-radius: 5px;
-                font-size: 50px;
-            }
+        <template if="{{$.globals.values.user}}" id="connected-view">
+            <style>
+                * {
+                    font-family: "RobotoDraft";
+                    font-weight: 300;
+                }
+            </style>
 
-            .section-content {
-                background-color: white;
-                width: 80%;
-                margin-left: 10%;
-            }
+            <twittargh-dashboard></twittargh-dashboard>
+            <twittargh-toolbar tool></twittargh-toolbar>
+        </template>
 
-        </style>
-
-        <flatiron-director route="{{route}}" autoHash></flatiron-director>
-
-        <core-animated-pages layout horizontal fit
-                             id="pages" selected="{{route}}" valueattr="hash"
-                             transitions="slide-from-right">
-            <template repeat="{{page, i in pages}}">
-                <section hash="{{page.hash}}" layout horizontal fit>
-                    <div class="section-content">
-                        <h1>{{page.name}}</h1>
-                    </div>
-                </section>
-            </template>
-        </core-animated-pages>
-
-        <twittargh-toolbar tool></twittargh-toolbar>
+        <core-ajax
+                auto
+                id="ajaxGetAuthentication"
+                url="/api/getAuthentication"
+                method="GET"
+                handleAs="json"
+                on-core-response="{{getAuthentication}}"
+                on-core-error="{{getAuthentication}}">
+        </core-ajax>
 
     </template>
 
     <script>
-
         Polymer('twittargh-app', {
-            pages: [
-                {name: 'Wall', hash: 'wall'},
-                {name: 'User', hash: 'profile'},
-                {name: 'Tag', hash: 'tag'}
-            ],
-            logged: false
+            logged: false,
+
+            ready: function() {
+                this.logged = !!this.$.globals.user;
+            },
+
+            getAuthentication: function(event, result) {
+                console.log(event, result);
+                //this.logged = (result.response.statusCode !== 401);
+            },
+
+            buttonClick: function (event, detail, sender) {
+                this.$.ajaxGetAuthentication.go();
+            }
         });
     </script>
 
