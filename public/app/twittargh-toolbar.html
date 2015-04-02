@@ -43,10 +43,12 @@
             }
         </style>
 
+        <twittargh-globals id="globals"></twittargh-globals>
+
         <core-toolbar flex center-center>
-            <core-toolbar>
+            <div>
                 Twitt<span style="margin: 0px; color: #FF1929; font-weight: bold;">argh !</span>
-            </core-toolbar>
+            </div>
 
             <paper-tabs flex="33" self-end>
                 <template repeat="{{page, i in pages}}">
@@ -62,7 +64,7 @@
 
             <div layout horizontal center-center>
                 <div class="username" flex>
-                    Martin&nbsp;<span class="lastname">DEQUATREMARE</span>
+                    {{$.globals.values.user.firstname}}&nbsp;<span class="lastname">{{$.globals.values.user.lastname}}</span>
                 </div>
                 <paper-icon-button icon="account-circle"></paper-icon-button>
                 <paper-icon-button icon="exit-to-app"></paper-icon-button>

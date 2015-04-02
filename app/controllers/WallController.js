@@ -20,5 +20,6 @@ module.exports.getWall = function (req, res, callback) {
 
     if (!authentication)
         return callback(new Errors.AuthenticationError());
+
     TweetService.getWall(authentication.username, callback, params.start, params.end);
 };

@@ -6,10 +6,15 @@
 <link rel="import" href="lib/flatiron-director/flatiron-director.html">
 <link rel="import" href="lib/font-roboto/roboto.html">
 <link rel="import" href="lib/paper-shadow/paper-shadow.html">
+<link rel="import" href="lib/paper-button/paper-button.html">
+<link rel="import" href="lib/paper-input/paper-input.html">
+<link rel="import" href="lib/paper-spinner/paper-spinner.html">
 
 <link rel="import" href="lib/core-ajax/core-ajax.html">
 
 <link rel="import" href="lib/core-icon/core-icon.html">
+
+<link rel="import" href="lib/core-style/core-style.html">
 
 <link rel="import" href="lib/core-icons/social-icons.html">
 <link rel="import" href="lib/core-icons/core-icons.html">
@@ -21,6 +26,31 @@
 
 <polymer-element name="twittargh-app" vertical layout>
     <template>
+
+        <style>
+            * /deep/ * {
+                font-family: "RobotoDraft";
+                font-weight: 400;
+            }
+
+            * /deep/ #ripple, * /deep/ #ink {
+                color: #FF1929;
+            }
+
+            * /deep/ core-toolbar {
+                background-color: #2a2a2a;
+            }
+
+            * /deep/ paper-button {
+                background-color: #2a2a2a;
+                color: white;
+            }
+
+            * /deep/ paper-spinner /deep/ .circle {
+                border-color: #FF1929;
+            }
+
+        </style>
 
         <twittargh-globals id="globals"></twittargh-globals>
 
@@ -54,21 +84,25 @@
 
     <script>
         Polymer('twittargh-app', {
-            logged: false,
 
-            ready: function() {
-                this.logged = !!this.$.globals.user;
-            },
-
-            getAuthentication: function(event, result) {
-                console.log(event, result);
-                //this.logged = (result.response.statusCode !== 401);
-            },
-
-            buttonClick: function (event, detail, sender) {
-                this.$.ajaxGetAuthentication.go();
+            getAuthentication: function (event, result) {
+                console.log(result);
+                if (!result.response.statusCode) {
+                    console.log(1);
+                    this.$.globals.values.user = result.response;
+                } else {
+                    this.$.globals.values.user = null;
+                }
             }
         });
+    </script>
+
+
+    <script>
+        CoreStyle.g.paperInput.labelColor = "rgb(42, 42, 42)";
+        CoreStyle.g.paperInput.focusedColor = "#FF1929";
+
+
     </script>
 
 </polymer-element>

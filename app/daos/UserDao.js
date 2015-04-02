@@ -35,7 +35,9 @@ module.exports.findOne = function (username, callback) {
             });
         }.bind(this)
     ], function (err, user) {
-        user.username = username;
+        if (user) {
+            user.username = username;
+        }
         callback(err, user);
     });
 };

@@ -27,7 +27,10 @@
     "flatiron-director": "Polymer/flatiron-director#master",
     "font-roboto": "Polymer/font-roboto#master",
     "paper-item": "Polymer/paper-item#master",
-    "paper-tabs": "Polymer/paper-tabs#~0.5.5"
+    "paper-tabs": "Polymer/paper-tabs#~0.5.5",
+    "paper-input": "Polymer/paper-input#~0.5.5",
+    "core-style": "Polymer/core-style#~0.5.5",
+    "paper-spinner": "Polymer/paper-spinner#~0.5.5"
   },
   "resolutions": {
     "core-media-query": "master",
@@ -48,6 +51,8 @@
     "core-a11y-keys": "master",
     "webcomponentsjs": "master",
     "core-meta": "master",
-    "core-iconset": "master"
+    "core-iconset": "master",
+    "core-input": "master",
+    "core-style": "master"
   }
 }
