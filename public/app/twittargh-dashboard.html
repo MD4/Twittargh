@@ -1,3 +1,4 @@
+<link rel="import" href="twittargh-page-wall.html">
 
 <polymer-element name="twittargh-dashboard">
 
@@ -8,11 +9,6 @@
                 overflow: hidden;
             }
 
-            core-animated-pages > * {
-                border-radius: 5px;
-                font-size: 50px;
-            }
-
             .section-content {
                 background-color: white;
                 width: 80%;
@@ -20,31 +16,39 @@
             }
         </style>
 
-        <flatiron-director route="{{route}}" autoHash></flatiron-director>
+        <twittargh-globals id="globals"></twittargh-globals>
+
+        <flatiron-director route="{{$.globals.values.route}}" autoHash></flatiron-director>
 
         <core-animated-pages layout horizontal fit
                              id="pages"
-                             selected="{{route}}"
+                             selected="{{getRouteRoot($.globals.values.route)}}"
                              valueattr="hash"
                              transitions="slide-from-right">
-            <template repeat="{{page, i in pages}}">
-                <section hash="{{page.hash}}" layout horizontal fit>
-                    <div class="section-content">
-                        <h1>{{page.name}}</h1>
-                    </div>
-                </section>
-            </template>
+            <section hash="wall" layout horizontal fit>
+                <twittargh-page-wall></twittargh-page-wall>
+            </section>
+            <section hash="profile" layout horizontal fit>
+                <div class="section-content">
+                    <h1>profile</h1>
+                </div>
+            </section>
+            <section hash="tag" layout horizontal fit>
+                <div class="section-content">
+                    <h1>tag</h1>
+                </div>
+            </section>
         </core-animated-pages>
     </template>
 
     <script>
 
         Polymer('twittargh-dashboard', {
-            pages: [
-                {name: 'Wall', hash: 'wall'},
-                {name: 'User', hash: 'profile'},
-                {name: 'Tag', hash: 'tag'}
-            ]
+
+            getRouteRoot: function (route) {
+                return route ? route.split('/')[0] : route;
+            }
+
         });
     </script>
 

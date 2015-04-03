@@ -1,4 +1,3 @@
-
 <polymer-element name="twittargh-toolbar">
 
     <template>
@@ -8,6 +7,11 @@
                 color: #fff;
                 margin: 0px;
                 padding: 0px;
+            }
+
+            .app-name {
+                font-size: 26px;
+                color: white;
             }
 
             paper-tabs {
@@ -46,13 +50,14 @@
         <twittargh-globals id="globals"></twittargh-globals>
 
         <core-toolbar flex center-center>
-            <div>
+            <div class="app-name">
+                <core-icon src="img/stain-icon.svg"></core-icon>
                 Twitt<span style="margin: 0px; color: #FF1929; font-weight: bold;">argh !</span>
             </div>
 
-            <paper-tabs flex="33" self-end>
+            <paper-tabs flex="33" self-end selected="{{getRouteIndex($.globals.values.route)}}">
                 <template repeat="{{page, i in pages}}">
-                    <paper-tab hash="page.hash">
+                    <paper-tab hash="page.hash" on-click="{{changePage}}">
                         <core-icon icon="{{page.icon}}"></core-icon>
                         {{page.name}}
                     </paper-tab>
@@ -64,12 +69,25 @@
 
             <div layout horizontal center-center>
                 <div class="username" flex>
-                    {{$.globals.values.user.firstname}}&nbsp;<span class="lastname">{{$.globals.values.user.lastname}}</span>
+                    {{$.globals.values.user.firstname}}&nbsp;<span
+                        class="lastname">{{$.globals.values.user.lastname}}</span>
                 </div>
                 <paper-icon-button icon="account-circle"></paper-icon-button>
-                <paper-icon-button icon="exit-to-app"></paper-icon-button>
+                <paper-icon-button
+                        icon="exit-to-app"
+                        on-click="{{signOut}}">
+                </paper-icon-button>
             </div>
         </core-toolbar>
+
+        <core-ajax
+                id="ajaxSignOut"
+                url="/api/signOut"
+                method="GET"
+                handleAs="json"
+                on-core-response="{{signOutResponse}}"
+                on-core-error="{{signOutResponse}}">
+        </core-ajax>
     </template>
 
     <script>
@@ -80,12 +98,33 @@
                 {name: 'Tag', hash: 'tag', icon: 'bookmark'}
             ],
 
-            ready: function () {
-                var navTabs = this.shadowRoot.querySelector('paper-tabs');
+            pageOrder: [
+                'wall',
+                'profile',
+                'tag'
+            ],
 
-                navTabs.addEventListener('core-select', function () {
-                    window.location.hash = this.pages[navTabs.selected].hash;
-                }.bind(this));
+            changePage: function(event, button, tab) {
+                this.$.globals.values.route = tab.templateInstance.model.page.hash;
+            },
+
+            getRouteIndex: function (route) {
+                route = route ? route.split('/')[0] : route;
+                if (!route || !~this.pageOrder.indexOf(route)) {
+                    if (this.$) {
+                        this.$.globals.values.route = this.pages[0].hash;
+                    }
+                    return 0;
+                }
+                return this.pageOrder.indexOf(route);
+            },
+
+            signOut: function () {
+                this.$.ajaxSignOut.go();
+            },
+
+            signOutResponse: function () {
+                this.$.globals.values.user = null;
             }
         });
     </script>

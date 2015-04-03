@@ -1,0 +1,88 @@
+
+<polymer-element name="twittargh-tweet" attributes="tweet">
+
+    <template>
+        <style>
+            .tweet {
+                color: #2a2a2a;
+                background-color: white;
+                border-radius: 2px;
+                border-bottom-left-radius: 120px;
+                border-top-left-radius: 120px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.33);
+                margin: 20px;
+            }
+
+            .tweet-icon {
+                width: 120px;
+                height: 120px;
+                margin: 10px;
+                border-radius: 150px;
+                border: 4px solid white;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.33);
+            }
+
+            .tweet-icon-stain {
+                position: relative;
+                left: 40px;
+                top: -80px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .tweet-header {
+                margin: 20px;
+            }
+
+            .username {
+                font-weight: 400;
+                font-size: 20px;
+            }
+
+            .date {
+                font-size: 16px;
+                color: rgb(200, 200, 200);
+            }
+
+            .content {
+                font-size: 20px;
+                margin: 10px;
+            }
+
+        </style>
+
+        <twittargh-globals id="globals"></twittargh-globals>
+
+        <paper-shadow z="1" layout horizontal class="tweet">
+            <div layout horizontal center>
+                <img class="tweet-icon" src="http://lorempixel.com/120/120/?{{tweet.username}}"/>
+            </div>
+            <div flex layout vertical>
+                <div class="tweet-header" layout horizontal auto-vertical center>
+                    <div class="username" flex>
+                        <a href="#profile/{{tweet.username}}">@{{tweet.username}}</a>
+                    </div>
+                    <div class="date" flex layout horizontal end-justified>
+                        {{tweet.date | formatDateFromNow}}
+                    </div>
+                </div>
+                <div class="content">
+                    {{tweet.content}}
+                </div>
+            </div>
+        </paper-shadow>
+
+    </template>
+
+    <script>
+        Polymer('twittargh-tweet', {
+
+            formatDateFromNow: function (date) {
+                return moment(date).fromNow();
+            }
+
+        });
+    </script>
+
+</polymer-element>
+

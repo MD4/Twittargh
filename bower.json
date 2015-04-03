@@ -30,7 +30,8 @@
     "paper-tabs": "Polymer/paper-tabs#~0.5.5",
     "paper-input": "Polymer/paper-input#~0.5.5",
     "core-style": "Polymer/core-style#~0.5.5",
-    "paper-spinner": "Polymer/paper-spinner#~0.5.5"
+    "paper-spinner": "Polymer/paper-spinner#~0.5.5",
+    "moment": "~2.9.0"
   },
   "resolutions": {
     "core-media-query": "master",

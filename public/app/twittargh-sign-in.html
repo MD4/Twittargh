@@ -40,24 +40,33 @@
 
             <paper-shadow self-center layout vertical id="sign-in-form" z="3">
                 <core-toolbar>
+                    <core-icon src="img/stain-icon.svg"></core-icon>
                     Twitt<span style="margin: 0px; color: #FF1929; font-weight: bold;">argh !</span>
                 </core-toolbar>
 
                 <template if="{{!signingIn}}" id="sign-in-form">
 
                     <div flex layout horizontal>
-                        <paper-input-decorator flex self-center id="username" label="Username" floatinglabel="true">
-                            <input type="text" is="core-input" value="{{username}}">
+                        <paper-input-decorator flex self-center label="Username" floatinglabel="true">
+                            <input type="text"
+                                   is="core-input"
+                                   id="username"
+                                   on-keypress="{{inputKeyPress}}"
+                                   value="{{username}}">
                         </paper-input-decorator>
                     </div>
                     <div flex layout horizontal>
-                        <paper-input-decorator flex self-center id="password" label="Password" floatinglabel="true">
-                            <input type="password" is="core-input" value="{{password}}">
+                        <paper-input-decorator flex self-center label="Password" floatinglabel="true">
+                            <input type="password"
+                                   is="core-input"
+                                   id="password"
+                                   on-keypress="{{inputKeyPress}}"
+                                   value="{{password}}">
                         </paper-input-decorator>
                     </div>
                     <div flex layout horizontal>
                         <paper-button on-click="{{signIn}}" id="submit" flex self-center raised>
-                            Connexion
+                            Sign in
                             <core-icon icon="arrow-forward"></core-icon>
                         </paper-button>
                     </div>
@@ -80,7 +89,7 @@
                     method="GET"
                     handleAs="json"
                     on-core-response="{{signInResponse}}"
-                    on-core-error="{{signInResponse}}">
+                    on-core-error="{{signInError}}">
             </core-ajax>
         </div>
     </template>
@@ -93,26 +102,29 @@
             username: "",
             password: "",
 
-            signIn: function() {
-                this.signingIn = true;
-            },
-
-            log: function () {
-                console.log(this.$.globals.values.user);
-                this.$.globals.values.user = true;
-                console.log(this.$.globals.values.user);
+            domReady: function () {
+                this.$.username.focus();
             },
 
             signIn: function () {
+                this.signingIn = true;
                 this.$.ajaxSignIn.go();
             },
 
-            signInResponse: function (event, result) {
-                if (!result.response.statusCode) {
-                    this.$.globals.values.user = result.response;
-                } else {
-                    this.$.globals.values.user = null;
+            inputKeyPress: function (event) {
+                if (event.keyCode === 13) {
+                    this.signIn();
                 }
+            },
+
+            signInResponse: function (event, result) {
+                this.signingIn = false;
+                this.$.globals.values.user = result.response;
+            },
+
+            signInError: function (event, result) {
+                this.signingIn = false;
+                this.$.globals.values.user = null;
             }
 
         });

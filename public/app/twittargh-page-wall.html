@@ -1,0 +1,49 @@
+<link rel="import" href="twittargh-tweet.html">
+
+<polymer-element name="twittargh-page-wall">
+
+    <template>
+        <style>
+            .section-content {
+                overflow: auto;
+                margin-top: 64px;
+                padding-left: 20%;
+                padding-right: 20%;
+            }
+        </style>
+
+        <twittargh-globals id="globals"></twittargh-globals>
+
+        <div class="section-content" fit>
+
+            <template repeat="{{tweet in wallTweets}}">
+                <twittargh-tweet tweet="{{tweet}}"></twittargh-tweet>
+            </template>
+
+        </div>
+
+        <core-ajax
+                auto
+                id="ajaxGetWall"
+                url="/api/wall"
+                method="GET"
+                handleAs="json"
+                on-core-response="{{getWallResponse}}"
+                on-core-error="{{getWallError}}">
+        </core-ajax>
+
+    </template>
+
+    <script>
+        Polymer('twittargh-page-wall', {
+
+            wallTweets: [],
+
+            getWallResponse: function (event, result) {
+                this.wallTweets = result.response;
+            }
+
+        });
+    </script>
+
+</polymer-element>

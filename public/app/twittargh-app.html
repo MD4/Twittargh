@@ -24,6 +24,8 @@
 <link rel="import" href="twittargh-sign-in.html">
 <link rel="import" href="twittargh-globals.html">
 
+<script src="lib/moment/moment.js"></script>
+
 <polymer-element name="twittargh-app" vertical layout>
     <template>
 
@@ -86,9 +88,7 @@
         Polymer('twittargh-app', {
 
             getAuthentication: function (event, result) {
-                console.log(result);
                 if (!result.response.statusCode) {
-                    console.log(1);
                     this.$.globals.values.user = result.response;
                 } else {
                     this.$.globals.values.user = null;
@@ -101,8 +101,6 @@
     <script>
         CoreStyle.g.paperInput.labelColor = "rgb(42, 42, 42)";
         CoreStyle.g.paperInput.focusedColor = "#FF1929";
-
-
     </script>
 
 </polymer-element>
