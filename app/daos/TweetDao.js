@@ -53,7 +53,7 @@ module.exports.findUserTweets = function (username, callback, start, end) {
 // zadd tweets:users:mdequatr UID 2378621302
 module.exports.save = function (tweet, callback) {
     if (!tweet || !tweet.content)
-        return callback(null, new Errors.BadRequestError());
+        return callback(new Errors.BadRequestError());
 
     async.series([
         function (cb) {

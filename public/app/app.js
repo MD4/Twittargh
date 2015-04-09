@@ -30,4 +30,14 @@
         this.route = this.route || DEFAULT_ROUTE; // Select initial route.
     });
 
+
+    // Patches
+
+    if (!String.prototype.startsWith) {
+        String.prototype.startsWith = function (searchString, position) {
+            position = position || 0;
+            return this.lastIndexOf(searchString, position) === position;
+        };
+    }
+
 })();

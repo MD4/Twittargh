@@ -1,0 +1,85 @@
+<link rel="import" href="twittargh-profile.html">
+
+<polymer-element name="twittargh-page-profile">
+
+    <template>
+        <style>
+            .section-content {
+                overflow: auto;
+                margin-top: 64px;
+                padding-left: 20%;
+                padding-right: 20%;
+            }
+        </style>
+
+        <twittargh-globals id="globals"></twittargh-globals>
+
+        <flatiron-director route="{{profileRoute}}" autoHash></flatiron-director>
+
+        <div class="section-content" fit>
+
+            <twittargh-profile profile="{{userProfile}}" tweetsCount="{{userTweets.length}}"></twittargh-profile>
+
+            <template repeat="{{tweet in userTweets}}">
+                <twittargh-tweet tweet="{{tweet}}"></twittargh-tweet>
+            </template>
+
+        </div>
+
+        <core-ajax
+                auto
+                url="/api/users/{{username}}"
+                method="GET"
+                handleAs="json"
+                on-core-response="{{getUserProfileResponse}}"
+                on-core-error="{{getUserProfileError}}">
+        </core-ajax>
+
+        <core-ajax
+                auto
+                id="ajaxGetUserTweets"
+                url="/api/tweets/{{username}}"
+                method="GET"
+                handleAs="json"
+                on-core-response="{{getUserTweetsResponse}}"
+                on-core-error="{{getUserTweetsError}}">
+        </core-ajax>
+
+    </template>
+
+    <script>
+        Polymer('twittargh-page-profile', {
+
+            userProfile: {},
+            username: null,
+            profileRoute: "",
+
+            userTweets: [],
+
+            profileRouteChanged: function () {
+                if (this.profileRoute.startsWith("profile")) {
+                    this.username =
+                            this.profileRoute.split('/')[1] ||
+                            this.$.globals.values.user.username;
+                }
+            },
+
+            getUserProfileResponse: function (event, result) {
+                this.userProfile = result.response;
+            },
+
+            getUserProfileError: function () {
+                this.userProfile = {};
+            },
+
+            getUserTweetsResponse: function (event, result) {
+                this.userTweets = result.response;
+            },
+
+            getUserTweetsError: function() {
+                this.userTweets = [];
+            }
+        });
+    </script>
+
+</polymer-element>

@@ -47,5 +47,7 @@ module.exports.postTweet = function (req, res, callback) {
 
     var tweetData = req.body;
 
+    console.log(tweetData);
+
     TweetService.createTweet(authentication.username, tweetData, callback);
 };

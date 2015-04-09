@@ -10,7 +10,23 @@
             }
 
             .app-name {
+                height: 100%;
                 font-size: 26px;
+                color: white;
+                cursor: pointer;
+            }
+
+            .app-name-red {
+                margin: 0px;
+                color: #FF1929;
+                font-weight: bold;
+            }
+
+            .app-name:hover {
+                color: #FF1929;
+            }
+
+            .app-name:hover .app-name-red {
                 color: white;
             }
 
@@ -50,9 +66,11 @@
         <twittargh-globals id="globals"></twittargh-globals>
 
         <core-toolbar flex center-center>
-            <div class="app-name">
-                <core-icon src="img/stain-icon.svg"></core-icon>
-                Twitt<span style="margin: 0px; color: #FF1929; font-weight: bold;">argh !</span>
+            <div class="app-name" layout horizontal center>
+                <div on-click="{{appNameClicked}}">
+                    <core-icon src="img/stain-icon.svg"></core-icon>
+                    Twitt<span class="app-name-red">argh !</span>
+                </div>
             </div>
 
             <paper-tabs flex="33" self-end selected="{{getRouteIndex($.globals.values.route)}}">
@@ -69,10 +87,12 @@
 
             <div layout horizontal center-center>
                 <div class="username" flex>
-                    {{$.globals.values.user.firstname}}&nbsp;<span
-                        class="lastname">{{$.globals.values.user.lastname}}</span>
+                    {{$.globals.values.user.firstname}}&nbsp;<span class="lastname">{{$.globals.values.user.lastname}}</span>
                 </div>
-                <paper-icon-button icon="account-circle"></paper-icon-button>
+                <paper-icon-button
+                        icon="account-circle"
+                        on-click="{{myProfile}}">
+                </paper-icon-button>
                 <paper-icon-button
                         icon="exit-to-app"
                         on-click="{{signOut}}">
@@ -104,7 +124,7 @@
                 'tag'
             ],
 
-            changePage: function(event, button, tab) {
+            changePage: function (event, button, tab) {
                 this.$.globals.values.route = tab.templateInstance.model.page.hash;
             },
 
@@ -121,6 +141,14 @@
 
             signOut: function () {
                 this.$.ajaxSignOut.go();
+            },
+
+            myProfile: function() {
+                window.location.hash = "profile";
+            },
+
+            appNameClicked: function() {
+                window.location.hash = "wall";
             },
 
             signOutResponse: function () {

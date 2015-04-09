@@ -83,15 +83,16 @@
 
             </paper-shadow>
 
-            <core-ajax
-                    id="ajaxSignIn"
-                    url="/api/signIn?username={{username}}&password={{password}}"
-                    method="GET"
-                    handleAs="json"
-                    on-core-response="{{signInResponse}}"
-                    on-core-error="{{signInError}}">
-            </core-ajax>
         </div>
+
+        <core-ajax
+                id="ajaxSignIn"
+                url="/api/signIn?username={{username}}&password={{password}}"
+                method="GET"
+                handleAs="json"
+                on-core-response="{{signInResponse}}"
+                on-core-error="{{signInError}}">
+        </core-ajax>
     </template>
 
     <script>

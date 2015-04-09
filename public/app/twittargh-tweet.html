@@ -10,12 +10,12 @@
                 border-bottom-left-radius: 120px;
                 border-top-left-radius: 120px;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.33);
-                margin: 20px;
+                margin: 30px;
             }
 
             .tweet-icon {
-                width: 120px;
-                height: 120px;
+                width: 100px;
+                height: 100px;
                 margin: 10px;
                 border-radius: 150px;
                 border: 4px solid white;
@@ -31,7 +31,7 @@
             }
 
             .tweet-header {
-                margin: 20px;
+                margin: 20px 20px 20px 10px;
             }
 
             .username {
@@ -39,14 +39,25 @@
                 font-size: 20px;
             }
 
+            .username-link {
+                color: rgb(170, 170, 170);
+                font-size: 16px;
+                margin-left: 5px;
+            }
+
             .date {
                 font-size: 16px;
-                color: rgb(200, 200, 200);
+                color: rgb(170, 170, 170);
             }
 
             .content {
-                font-size: 20px;
+                font-size: 18px;
                 margin: 10px;
+            }
+
+            .lastname {
+                color: #FF1929;
+                font-weight: bold;
             }
 
         </style>
@@ -55,12 +66,17 @@
 
         <paper-shadow z="1" layout horizontal class="tweet">
             <div layout horizontal center>
-                <img class="tweet-icon" src="http://lorempixel.com/120/120/?{{tweet.username}}"/>
+                <img class="tweet-icon" src="/img/profiles/{{tweet.username}}.jpg"/> <!--src="http://lorempixel.com/120/120/?{{tweet.username}}"/>-->
             </div>
             <div flex layout vertical>
                 <div class="tweet-header" layout horizontal auto-vertical center>
-                    <div class="username" flex>
-                        <a href="#profile/{{tweet.username}}">@{{tweet.username}}</a>
+                    <div layout horizontal center flex>
+                        <div class="username">
+                            {{tweet.firstname}}&nbsp;<span class="lastname">{{tweet.lastname}}</span>
+                        </div>
+                        <a class="username-link" href="#profile/{{tweet.username}}">
+                            @{{tweet.username}}
+                        </a>
                     </div>
                     <div class="date" flex layout horizontal end-justified>
                         {{tweet.date | formatDateFromNow}}

@@ -1,4 +1,5 @@
 var async = require('async'),
+    TweetFactory = require('../factories/TweetFactory'),
     TweetDao = require('../daos/TweetDao'),
     WallDao = require('../daos/WallDao'),
     UserDao = require('../daos/UserDao'),
@@ -17,18 +18,16 @@ module.exports.getWall = function (username, callback, start, end) {
 };
 
 module.exports.createTweet = function (username, tweetData, callback) {
-    var tweet = {
-        id: uuid.v4(),
-        username: username,
-        content: tweetData.content,
-        date: new Date()
-    };
-
     async.waterfall([
-       function(cb) {
-           UserDao.findOne(username, cb);
-       },
+        function (cb) {
+            UserDao.findOne(username, cb);
+        },
         function(user, cb) {
+            TweetFactory.create(user, tweetData, function(err, tweet) {
+                cb(err, tweet, user);
+            });
+        },
+        function (tweet, user, cb) {
             async.series([
                 function (cb) {
                     TweetDao.save(tweet, cb);
@@ -38,7 +37,7 @@ module.exports.createTweet = function (username, tweetData, callback) {
                 }
             ], cb);
         }
-    ], function(err) {
+    ], function (err) {
         callback(err);
     });
 };

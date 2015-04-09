@@ -9,6 +9,7 @@
 <link rel="import" href="lib/paper-button/paper-button.html">
 <link rel="import" href="lib/paper-input/paper-input.html">
 <link rel="import" href="lib/paper-spinner/paper-spinner.html">
+<link rel="import" href="lib/paper-input/paper-char-counter.html">
 
 <link rel="import" href="lib/core-ajax/core-ajax.html">
 
@@ -30,6 +31,15 @@
     <template>
 
         <style>
+            * /deep/ a, a:active {
+                color: #2a2a2a;
+                outline: none;
+            }
+
+            * /deep/ a:hover {
+                color: #FF1929;
+            }
+
             * /deep/ * {
                 font-family: "RobotoDraft";
                 font-weight: 400;
