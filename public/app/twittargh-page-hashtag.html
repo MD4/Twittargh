@@ -1,0 +1,67 @@
+<link rel="import" href="twittargh-hashtag.html">
+
+<polymer-element name="twittargh-page-hashtag">
+
+    <template>
+        <style>
+            .section-content {
+                overflow: auto;
+                margin-top: 64px;
+                padding-left: 20%;
+                padding-right: 20%;
+            }
+        </style>
+
+        <twittargh-globals id="globals"></twittargh-globals>
+
+        <flatiron-director route="{{hashtagRoute}}" autoHash></flatiron-director>
+
+        <div class="section-content" fit>
+
+            <twittargh-hashtag hashtag="{{hashtag}}" tweetsCount="{{hashtagTweets.length}}"></twittargh-hashtag>
+
+            <template repeat="{{tweet in hashtagTweets}}">
+                <twittargh-tweet tweet="{{tweet}}"></twittargh-tweet>
+            </template>
+
+        </div>
+
+        <core-ajax
+                auto
+                id="ajaxGetHashtagTweets"
+                url="/api/tweets/hashtag/{{hashtag}}"
+                method="GET"
+                handleAs="json"
+                on-core-response="{{getHashtagTweetsResponse}}"
+                on-core-error="{{getHashtagTweetsError}}">
+        </core-ajax>
+
+    </template>
+
+    <script>
+        Polymer('twittargh-page-hashtag', {
+
+            hashtag: null,
+            hashtagRoute: "",
+
+            hashtagTweets: [],
+
+            hashtagRouteChanged: function () {
+                if (this.hashtagRoute.startsWith("tag")) {
+                    this.hashtag =
+                            this.hashtagRoute.split('/')[1] ||
+                            "";
+                }
+            },
+
+            getHashtagTweetsResponse: function (event, result) {
+                this.hashtagTweets = result.response;
+            },
+
+            getHashtagTweetsError: function() {
+                this.hashtagTweets = [];
+            }
+        });
+    </script>
+
+</polymer-element>

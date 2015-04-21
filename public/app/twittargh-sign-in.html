@@ -41,7 +41,7 @@
             <paper-shadow self-center layout vertical id="sign-in-form" z="3">
                 <core-toolbar>
                     <core-icon src="img/stain-icon.svg"></core-icon>
-                    Twitt<span style="margin: 0px; color: #FF1929; font-weight: bold;">argh !</span>
+                    Twitt<span style="margin: 0; color: #FF1929; font-weight: bold;">argh !</span>
                 </core-toolbar>
 
                 <template if="{{!signingIn}}" id="sign-in-form">
@@ -121,6 +121,9 @@
             signInResponse: function (event, result) {
                 this.signingIn = false;
                 this.$.globals.values.user = result.response;
+                if (result.response) {
+                    window.location.hash = "wall";
+                }
             },
 
             signInError: function (event, result) {

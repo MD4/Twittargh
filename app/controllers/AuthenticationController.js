@@ -14,9 +14,6 @@ var async = require('async'),
  * GET /auth
  */
 module.exports.getAuthentication = function (req, res, callback) {
-    if (!AuthenticationService.isAuthenticated(req.session))
-        return callback(new Errors.AuthenticationError());
-
     AuthenticationService.getAuthentication(req.session, callback);
 };
 

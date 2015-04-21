@@ -1,21 +1,28 @@
-var Async = require('async'),
-    UserService = require('../services/UserService'),
+var UserService = require('../services/UserService'),
     Errors = require('../utils/errors/Errors'),
     ModelFilter = require('../utils/filters/ModelFilter');
 
-var authenticationFilter = ["username", "firstname", "lastname"];
+var authenticationFilter = ["username", "firstname", "lastname", "following"];
 
 // **************************
 //                  PRIVATE *
 // **************************
 
-var getAuthentication = function (session) {
-    if (!session.authentication) return null;
-    return ModelFilter.include(session.authentication, authenticationFilter);
+var getAuthentication = function (session, callback) {
+    if (!session.authentication) return new Errors.AuthenticationError();
+
+    UserService.findOne(session.authentication.username, function (err, user) {
+        if (err) return callback(err);
+        if (!user) return callback(new Errors.AuthenticationError());
+
+        callback(null, ModelFilter.include(user, authenticationFilter));
+    });
 };
 
 var initSession = function (session, authentication) {
-    session.authentication = ModelFilter.include(authentication, authenticationFilter);
+    session.authentication = {
+        username: authentication
+    }.username;
     session.logged = true;
 };
 
@@ -29,9 +36,8 @@ var killSession = function (session) {
 // **************************
 
 module.exports.getAuthentication = function (session, callback) {
-    var authentication = getAuthentication(session);
-    callback && callback(null, authentication);
-    return authentication;
+    console.log(session, callback);
+    getAuthentication(session, callback);
 };
 
 module.exports.signIn = function (session, username, password, callback) {
@@ -46,7 +52,7 @@ module.exports.signIn = function (session, username, password, callback) {
         if (user.password !== password) return callback(new Errors.AuthenticationError());
 
         initSession(session, user);
-        callback(null, getAuthentication(session));
+        getAuthentication(session, callback);
     });
 };
 
@@ -56,5 +62,5 @@ module.exports.signOut = function (session, callback) {
 };
 
 module.exports.isAuthenticated = function(session) {
-    return !!getAuthentication(session);
+    return !!session.authentication;
 };

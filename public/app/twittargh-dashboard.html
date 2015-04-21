@@ -1,5 +1,6 @@
 <link rel="import" href="twittargh-page-wall.html">
 <link rel="import" href="twittargh-page-profile.html">
+<link rel="import" href="twittargh-page-hashtag.html">
 
 <polymer-element name="twittargh-dashboard">
 
@@ -10,11 +11,6 @@
                 overflow: hidden;
             }
 
-            .section-content {
-                background-color: white;
-                width: 80%;
-                margin-left: 10%;
-            }
         </style>
 
         <twittargh-globals id="globals"></twittargh-globals>
@@ -33,9 +29,7 @@
                 <twittargh-page-profile></twittargh-page-profile>
             </section>
             <section hash="tag" layout horizontal fit>
-                <div class="section-content">
-                    <h1>tag</h1>
-                </div>
+                <twittargh-page-hashtag></twittargh-page-hashtag>
             </section>
         </core-animated-pages>
     </template>

@@ -33,13 +33,15 @@ module.exports.getUser = function (req, res, callback) {
  * POST /users/:username/follow
  */
 module.exports.follow = function (req, res, callback) {
-    var authentication = AuthenticationService.getAuthentication(req.session),
-        data = req.params;
+    var data = req.params;
 
-    if (!authentication)
-        return callback(new Errors.AuthenticationError());
+    AuthenticationService.getAuthentication(req.session, function(err, authentication) {
+        if (err) {
+            return callback(err);
+        }
 
-    UserService.follow(authentication.username, data.username, callback);
+        UserService.follow(authentication.username, data.username, callback);
+    });
 };
 
 
@@ -47,13 +49,15 @@ module.exports.follow = function (req, res, callback) {
  * POST /users/:username/unfollow
  */
 module.exports.unfollow = function (req, res, callback) {
-    var authentication = AuthenticationService.getAuthentication(req.session),
-        data = req.params;
+    var data = req.params;
 
-    if (!authentication)
-        return callback(new Errors.AuthenticationError());
+    AuthenticationService.getAuthentication(req.session, function(err, authentication) {
+        if (err) {
+            return callback(err);
+        }
 
-    UserService.unfollow(authentication.username, data.username, callback);
+        UserService.unfollow(authentication.username, data.username, callback);
+    });
 };
 
 /**

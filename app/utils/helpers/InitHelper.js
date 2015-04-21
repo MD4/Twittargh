@@ -41,27 +41,35 @@ function initializeUsers() {
         });
 
     TweetService.createTweet("mdequatr", {
-        content: "Redrum !"
+        content: "Redrum ! #kill #redrum"
     }, function () {
     });
     TweetService.createTweet("rparker", {
         content: "1, 2, 3. Check, CHECK !"
     }, function () {
     });
+    TweetService.createTweet("jsmith", {
+        content: "Si ! Me gusta la cucaracha ! #cucaracha"
+    }, function () {
+    });
     TweetService.createTweet("jblack", {
-        content: "YARRHG ! I'LL KILL YA !"
+        content: "YARRHG ! I'LL KILL YA ! #argh #kill"
     }, function () {
     });
     TweetService.createTweet("jsmith", {
-        content: "Si Gringo ! Morre dolarrz !"
+        content: "Si Gringo ! #cucaracha Morre dolarrz ! #money #kill"
     }, function () {
     });
     TweetService.createTweet("jblack", {
-        content: "GRRRR ! AAARRRHHH ! GRAAAAAARRGH !"
+        content: "GRRRR ! AAARRRHHH ! GRAAAAAARRGH ! #argh"
     }, function () {
     });
     TweetService.createTweet("mdequatr", {
-        content: "Where did I put my axe ?"
+        content: "Where did I put my axe ? #redrum"
+    }, function () {
+    });
+    TweetService.createTweet("rparker", {
+        content: "AHAHAH AHAHAHAHAH AHAHAHAHA !! #haha #kill"
     }, function () {
     });
 

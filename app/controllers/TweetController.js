@@ -37,17 +37,30 @@ module.exports.getTweetsForUser = function (req, res, callback) {
 };
 
 /**
+ * GET /tweets/hashtag/:hashtag
+ */
+module.exports.getTweetsForHashtag = function (req, res, callback) {
+    if (!AuthenticationService.isAuthenticated(req.session))
+        return callback(new Errors.AuthenticationError());
+
+    var data = req.params;
+    var params = req.query;
+
+    TweetService.findHashtagTweets(data.hashtag, callback, params.start, params.end);
+};
+
+/**
  * POST /tweets
  */
 module.exports.postTweet = function (req, res, callback) {
-    var authentication = AuthenticationService.getAuthentication(req.session);
-
-    if (!authentication)
-        return callback(new Errors.AuthenticationError());
-
     var tweetData = req.body;
 
-    console.log(tweetData);
+    AuthenticationService.getAuthentication(req.session, function(err, authentication) {
+        if (err) {
+            return callback(err);
+        }
 
-    TweetService.createTweet(authentication.username, tweetData, callback);
+        TweetService.createTweet(authentication.username, tweetData, callback);
+    });
+
 };

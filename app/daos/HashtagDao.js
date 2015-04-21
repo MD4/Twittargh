@@ -1,21 +1,21 @@
 var async = require('async'),
     redis = require('../utils/helpers/RedisHelper'),
     Errors = require('../utils/errors/Errors'),
-    TweetDao = require('../daos/TweetDao'),
-    WallDao = require('../daos/WallDao');
+    TweetDao = require('../daos/TweetDao');
 
 var tweetsHashtagsPath = module.exports.hashtagsPath = ["tweets", "hashtags"];
 
 
-module.exports.propagateTweet = function (tweet, hashtags, callback) {
-    if (!tweet || !hashtags)
+module.exports.propagateTweet = function (tweet, callback) {
+    if (!tweet)
         callback(new Errors.BadRequestError());
-
+    console.log(tweet);
     async.each(
-        hashtags,
+        tweet.hashtags,
         function (hashtag, cb) {
+            console.log(hashtag);
             redis.zadd(
-                redis.getKey(WallDao.wallPath, hashtag),
+                redis.getKey(tweetsHashtagsPath, hashtag),
                 tweet.date.getTime(),
                 tweet.id,
                 function (err) {

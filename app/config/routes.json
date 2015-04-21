@@ -26,6 +26,12 @@
     "functionName": "getTweetsForUser"
   },
   {
+    "url": "/tweets/hashtag/:hashtag",
+    "method": "get",
+    "controller": "TweetController",
+    "functionName": "getTweetsForHashtag"
+  },
+  {
     "url": "/tweets",
     "method": "post",
     "controller": "TweetController",

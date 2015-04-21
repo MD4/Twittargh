@@ -1,7 +1,5 @@
 var AuthenticationService = require('../services/AuthenticationService'),
-    TweetService = require('../services/TweetService'),
-    Errors = require('../utils/errors/Errors');
-
+    TweetService = require('../services/TweetService');
 // **************************
 //                  PRIVATE *
 // **************************
@@ -14,12 +12,13 @@ var AuthenticationService = require('../services/AuthenticationService'),
  * GET /wall
  */
 module.exports.getWall = function (req, res, callback) {
-    var authentication = AuthenticationService.getAuthentication(req.session);
-
     var params = req.query;
 
-    if (!authentication)
-        return callback(new Errors.AuthenticationError());
+    AuthenticationService.getAuthentication(req.session, function(err, authentication) {
+        if (err) {
+            return callback(err);
+        }
 
-    TweetService.getWall(authentication.username, callback, params.start, params.end);
+        TweetService.getWall(authentication.username, callback, params.start, params.end);
+    });
 };

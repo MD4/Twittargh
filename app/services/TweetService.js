@@ -3,7 +3,7 @@ var async = require('async'),
     TweetDao = require('../daos/TweetDao'),
     WallDao = require('../daos/WallDao'),
     UserDao = require('../daos/UserDao'),
-    uuid = require('node-uuid');
+    HashtagDao = require('../daos/HashtagDao');
 
 module.exports.findOne = function (id, callback) {
     TweetDao.findOne(id, callback);
@@ -11,6 +11,10 @@ module.exports.findOne = function (id, callback) {
 
 module.exports.findUserTweets = function (username, callback, start, end) {
     TweetDao.findUserTweets(username, callback, start, end);
+};
+
+module.exports.findHashtagTweets = function (hashtag, callback, start, end) {
+    HashtagDao.findHashtagTweets(hashtag, callback, start, end);
 };
 
 module.exports.getWall = function (username, callback, start, end) {
@@ -34,6 +38,9 @@ module.exports.createTweet = function (username, tweetData, callback) {
                 },
                 function (cb) {
                     WallDao.propagateTweet(tweet, user, cb);
+                },
+                function(cb) {
+                    HashtagDao.propagateTweet(tweet, cb)
                 }
             ], cb);
         }
