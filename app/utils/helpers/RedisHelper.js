@@ -5,7 +5,7 @@ var configDb = require('../../config/database.json'),
 client.select(configDb.db);
 
 client.on('error', function (err) {
-    console.log('Redis error', err);
+    console.error('Redis error', err);
 });
 
 client.getKey = function(path, name) {

@@ -9,11 +9,9 @@ var tweetsHashtagsPath = module.exports.hashtagsPath = ["tweets", "hashtags"];
 module.exports.propagateTweet = function (tweet, callback) {
     if (!tweet)
         callback(new Errors.BadRequestError());
-    console.log(tweet);
     async.each(
         tweet.hashtags,
         function (hashtag, cb) {
-            console.log(hashtag);
             redis.zadd(
                 redis.getKey(tweetsHashtagsPath, hashtag),
                 tweet.date.getTime(),

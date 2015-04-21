@@ -73,7 +73,6 @@ module.exports.appendTweets = function (followerUsername, followedUsername, call
         "AGGREGATE",
         "MIN",
         function (err) {
-            console.log(err);
             callback(err ? new Errors.InternalError() : null);
         }
     );
@@ -97,7 +96,6 @@ module.exports.removeTweets = function (followerUsername, followedUsername, call
                 1,
                 -1,
                 function (err, result) {
-                    console.log(err, result);
                     cb(err ? new Errors.InternalError() : null);
                 }
             );
@@ -108,7 +106,6 @@ module.exports.removeTweets = function (followerUsername, followedUsername, call
                 '-inf',
                 0,
                 function (err, result) {
-                    console.log(err, result);
                     cb(err ? new Errors.InternalError() : null);
                 }
             );

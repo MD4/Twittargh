@@ -36,7 +36,6 @@ var killSession = function (session) {
 // **************************
 
 module.exports.getAuthentication = function (session, callback) {
-    console.log(session, callback);
     getAuthentication(session, callback);
 };
 
