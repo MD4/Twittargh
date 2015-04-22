@@ -144,12 +144,12 @@
 
             isFollowing: false,
 
-            ready: function() {
+            profileChanged: function() {
                 this.isFollowing = this.following();
             },
 
             following: function () {
-                return !~this.$.globals.values.user.following.indexOf(this.profile.username);
+                return !!~this.$.globals.values.user.following.indexOf(this.profile.username);
             },
 
             followClicked: function () {

@@ -6,8 +6,11 @@ var configServer = require('./config/server.json'),
 
 var server = new Server(configServer, configDB);
 
+// Database init
 InitHelper.initializeDatabase();
 
+// REST API routes setup
 server.route(configRoutes);
 
+// go Go GO !
 server.start();

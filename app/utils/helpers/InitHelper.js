@@ -2,6 +2,9 @@ var redis = require('./RedisHelper'),
     TweetService = require('../../services/TweetService'),
     UserService = require('../../services/UserService');
 
+/**
+ * Initializes the database with test data
+ */
 module.exports.initializeDatabase = function () {
     redis.hgetall("users:mdequatr", function (err, dummyUser) {
         if (!dummyUser) {
@@ -10,27 +13,50 @@ module.exports.initializeDatabase = function () {
     });
 };
 
+/**
+ * Test data
+ */
 function initializeUsers() {
     [
         {
-            username: "jblack",
+            username: "jtorrance",
             firstname: "Jack",
-            lastname: "BLACK"
+            lastname: "TORRANCE"
         },
         {
-            username: "jsmith",
-            firstname: "John",
-            lastname: "SMITH"
+            username: "mcorleone",
+            firstname: "Michael",
+            lastname: "CORLEONE"
         },
         {
-            username: "rparker",
-            firstname: "Ron",
-            lastname: "PARKER"
+            username: "joker",
+            firstname: "Jo",
+            lastname: "KER"
         },
         {
-            username: "mdequatr",
-            firstname: "Martin",
-            lastname: "DEQUATREMARE"
+            username: "hlecter",
+            firstname: "Hannibal",
+            lastname: "LECTER"
+        },
+        {
+            username: "ca",
+            firstname: "Gripsou",
+            lastname: "LE CLOWN"
+        },
+        {
+            username: "kfrueger",
+            firstname: "Kreddy",
+            lastname: "Frueger"
+        },
+        {
+            username: "pgonzales",
+            firstname: "Pedro",
+            lastname: "GONZALES"
+        },
+        {
+            username: "dvador",
+            firstname: "Dark",
+            lastname: "VADOR"
         }
     ].forEach(function (user) {
             var username = user.username;
@@ -40,53 +66,53 @@ function initializeUsers() {
             });
         });
 
-    TweetService.createTweet("mdequatr", {
+    TweetService.createTweet("jtorrance", {
         content: "Redrum ! #kill #redrum"
     }, function () {
     });
-    TweetService.createTweet("rparker", {
+    TweetService.createTweet("joker", {
         content: "1, 2, 3. Check, CHECK !"
     }, function () {
     });
-    TweetService.createTweet("jsmith", {
+    TweetService.createTweet("mcorleone", {
         content: "Si ! Me gusta la cucaracha ! #cucaracha"
     }, function () {
     });
-    TweetService.createTweet("jblack", {
+    TweetService.createTweet("hlecter", {
         content: "YARRHG ! I'LL KILL YA ! #argh #kill"
     }, function () {
     });
-    TweetService.createTweet("jsmith", {
+    TweetService.createTweet("mcorleone", {
         content: "Si Gringo ! #cucaracha Morre dolarrz ! #money #kill"
     }, function () {
     });
-    TweetService.createTweet("jblack", {
+    TweetService.createTweet("hlecter", {
         content: "GRRRR ! AAARRRHHH ! GRAAAAAARRGH ! #argh"
     }, function () {
     });
-    TweetService.createTweet("mdequatr", {
+    TweetService.createTweet("jtorrance", {
         content: "Where did I put my axe ? #redrum"
     }, function () {
     });
-    TweetService.createTweet("rparker", {
+    TweetService.createTweet("joker", {
         content: "AHAHAH AHAHAHAHAH AHAHAHAHA !! #haha #kill"
     }, function () {
     });
 
 
-    UserService.follow("mdequatr", "jblack", function () {
+    UserService.follow("jtorrance", "hlecter", function () {
     });
-    UserService.follow("mdequatr", "jsmith", function () {
+    UserService.follow("jtorrance", "mcorleone", function () {
     });
-    UserService.follow("mdequatr", "rparker", function () {
+    UserService.follow("jtorrance", "joker", function () {
     });
-    UserService.follow("jblack", "jsmith", function () {
+    UserService.follow("hlecter", "mcorleone", function () {
     });
-    UserService.follow("jblack", "mdequatr", function () {
+    UserService.follow("hlecter", "jtorrance", function () {
     });
-    UserService.follow("rparker", "jsmith", function () {
+    UserService.follow("joker", "mcorleone", function () {
     });
-    UserService.follow("jsmith", "rparker", function () {
+    UserService.follow("mcorleone", "joker", function () {
     });
 
 }

@@ -5,6 +5,11 @@ var async = require('async'),
 var tweetsDataPath = module.exports.dataPath = ["tweets", "data"];
 var tweetsUsersPath = module.exports.usersPath = ["tweets", "users"];
 
+/**
+ * Find a tweet by its id
+ * @param id Tweet id
+ * @param callback
+ */
 module.exports.findOne = function (id, callback) {
     redis.hgetall(redis.getKey(tweetsDataPath, id), function (err, tweet) {
         if (err) {
@@ -18,8 +23,14 @@ module.exports.findOne = function (id, callback) {
     });
 };
 
-// zrevrangebyscore tweets:users:mdequatr +inf 0
-
+/**
+ * Find tweets ids for a given owner
+ * QUERY : zrevrangebyscore tweets:users:mdequatr +inf 0
+ * @param username Owner username
+ * @param callback
+ * @param start (optional) Look for tweets older than that timestamp
+ * @param end (optional) Look for tweets newer than that timestamp
+ */
 module.exports.findUserTweetsIds = function (username, callback, start, end) {
     start = start || "+inf";
     end = end || "-inf";
@@ -35,7 +46,13 @@ module.exports.findUserTweetsIds = function (username, callback, start, end) {
     });
 };
 
-
+/**
+ * Find tweets ids for a given owner
+ * @param username Owner username
+ * @param callback
+ * @param start (optional) Look for tweets older than that timestamp
+ * @param end (optional) Look for tweets newer than that timestamp
+ */
 module.exports.findUserTweets = function (username, callback, start, end) {
     async.waterfall([
         function (cb) {
@@ -49,8 +66,13 @@ module.exports.findUserTweets = function (username, callback, start, end) {
     });
 };
 
-// hmset tweets:data:UID content "Hey !"
-// zadd tweets:users:mdequatr UID 2378621302
+/**
+ * Save a tweet
+ * QUERY : hmset tweets:data:UID content "Hey !"
+ *         zadd tweets:users:mdequatr UID 2378621302
+ * @param tweet Tweet to save
+ * @param callback
+ */
 module.exports.save = function (tweet, callback) {
     if (!tweet || !tweet.content)
         return callback(new Errors.BadRequestError());

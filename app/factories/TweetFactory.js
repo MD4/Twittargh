@@ -2,7 +2,12 @@ var async = require('async'),
     Errors = require('../utils/errors/Errors'),
     uuid = require('node-uuid');
 
-
+/**
+ * Create a new tweet
+ * @param user Tweet owner
+ * @param tweetData Tweet user data
+ * @param callback
+ */
 module.exports.create = function(user, tweetData, callback) {
     if (!user || !tweetData || !tweetData.content)
         return callback(new Errors.BadRequestError());

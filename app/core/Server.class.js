@@ -6,6 +6,12 @@ var express = require("express"),
     cookieParser = require('cookie-parser'),
     RedisStore = require('connect-redis')(session);
 
+/**
+ * Server constructor
+ * @param serverSettings JSON server settings
+ * @param dbSettings JSON database settings
+ * @constructor
+ */
 var Server = function (serverSettings, dbSettings) {
     this.settings = serverSettings || {};
     this.dbSettings = dbSettings || {};
@@ -37,6 +43,9 @@ var Server = function (serverSettings, dbSettings) {
     this.server = server;
 };
 
+/**
+ * Starts the server
+ */
 Server.prototype.start = function () {
     http.createServer(this.server).listen(this.settings.port);
 
@@ -47,6 +56,10 @@ Server.prototype.start = function () {
     console.log();
 };
 
+/**
+ * Initialize REST API routes
+ * @param routes JSON routes configuration
+ */
 Server.prototype.route = function (routes) {
 
     routes.forEach(function (route) {

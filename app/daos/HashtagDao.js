@@ -5,7 +5,11 @@ var async = require('async'),
 
 var tweetsHashtagsPath = module.exports.hashtagsPath = ["tweets", "hashtags"];
 
-
+/**
+ * Propagate a tweet on every hashtag mentioned
+ * @param tweet Tweet to propagate
+ * @param callback
+ */
 module.exports.propagateTweet = function (tweet, callback) {
     if (!tweet)
         callback(new Errors.BadRequestError());
@@ -26,7 +30,13 @@ module.exports.propagateTweet = function (tweet, callback) {
     );
 };
 
-
+/**
+ * Find ids of every tweet linked to the given hashtag
+ * @param hashtag Hashtag to look for
+ * @param callback
+ * @param start (optional) Look for tweets older than that timestamp
+ * @param end (optional) Look for tweets newer than that timestamp
+ */
 module.exports.findHashtagTweetsIds = function (hashtag, callback, start, end) {
     start = start || "+inf";
     end = end || "-inf";
@@ -42,7 +52,13 @@ module.exports.findHashtagTweetsIds = function (hashtag, callback, start, end) {
     });
 };
 
-
+/**
+ * Find every tweet linked to the given hashtag
+ * @param hashtag Hashtag to look for
+ * @param callback
+ * @param start (optional) Look for tweets older than that timestamp
+ * @param end (optional) Look for tweets newer than that timestamp
+ */
 module.exports.findHashtagTweets = function (hashtag, callback, start, end) {
     async.waterfall([
         function (cb) {

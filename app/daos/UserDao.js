@@ -6,6 +6,11 @@ var userPath = module.exports.path = ["users"];
 var userFollowersPath = module.exports.followersPath = ["users", "followers"];
 var userFollowingPath = module.exports.followingPath = ["users", "following"];
 
+/**
+ * Find a user by its username
+ * @param username User username
+ * @param callback
+ */
 module.exports.findOne = function (username, callback) {
     async.waterfall([
         function (cb) {
@@ -42,6 +47,12 @@ module.exports.findOne = function (username, callback) {
     });
 };
 
+/**
+ * Make a user following another one
+ * @param followerUsername User which will follow
+ * @param followedUsername User which will be followed
+ * @param callback
+ */
 module.exports.follow = function (followerUsername, followedUsername, callback) {
     if (!followerUsername || !followedUsername || followerUsername === followedUsername)
         return callback(new Errors.BadRequestError());
@@ -70,6 +81,12 @@ module.exports.follow = function (followerUsername, followedUsername, callback) 
     });
 };
 
+/**
+ * Make a user unfollow another one
+ * @param followerUsername User which will unfollow
+ * @param followedUsername User which will be unfollowed
+ * @param callback
+ */
 module.exports.unfollow = function (followerUsername, followedUsername, callback) {
     if (!followerUsername || !followedUsername || followerUsername === followedUsername)
         return callback(new Errors.BadRequestError());
@@ -98,6 +115,12 @@ module.exports.unfollow = function (followerUsername, followedUsername, callback
     });
 };
 
+
+/**
+ * Get every user which the given user follows
+ * @param username User username
+ * @param callback
+ */
 module.exports.getFollowing = function(username, callback) {
     if (!username)
         return callback(new Errors.BadRequestError());
@@ -113,6 +136,11 @@ module.exports.getFollowing = function(username, callback) {
     );
 };
 
+/**
+ * Get every user following a given user
+ * @param username User username
+ * @param callback
+ */
 module.exports.getFollowers = function(username, callback) {
     if (!username)
         return callback(new Errors.BadRequestError());
