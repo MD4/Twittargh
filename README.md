@@ -13,15 +13,16 @@
 ### Installation
 
 - Clone the repo: `git clone https://github.com/MD4/Twittargh.git`
+- Go to the folder : `cd Twittargh`
 - Install dependencies with `npm install`
 - Start your local redis server
 - Start the app with `npm start`
 - Go to [http://localhost:3000](http://localhost:3000)
 - Take a coffee
 
-### Tests
+### Test accounts
 
-- Usernames : `joker, dvado, kfrueger, jtorrance, mcorleone, hlecter, ca`
+- Usernames : `joker, dvador, kfrueger, jtorrance, mcorleone, hlecter, ca`
 - Password : `password`
 
 ## Features
@@ -44,42 +45,40 @@
   - [x] Tweet list from hashtag name
   - [x] Tweet propagation to hashtag
 - [ ] Be a twitter competitor
-  - [x] Be amazingly foolproof 
+  - [x] Be amazingly foolproof (Yes. Really.)
   - [ ] Make huge amount of money
 
 ## Documentation
 
 ### Front end
 
-Written with **Polymer** : Web Components oriented frnt-end architecture
+Written with [Polymer](https://www.polymer-project.org) : Web Components oriented frnt-end architecture
 
-[https://www.polymer-project.org](https://www.polymer-project.org)
+**Libs**
 
-**libs**
-
- - momentjs : Parse, validate, manipulate and display dates - [http://momentjs.com](http://momentjs.com)
+ - [momentjs](http://momentjs.com) : Parse, validate, manipulate and display dates
 
 ### Back-end
 
 #### API (REST)
 
-Written with **Node.js** : Javascript platform
+Written with [Node.js](https://nodejs.org) : Javascript platform
 
-[https://nodejs.org](https://nodejs.org)
+**Architecture** :
+ - Classical Service Oriented Architecture (SOA)
+ 
+**Methodogy** :
+ - [YOLO Driven Development (YDD)](http://ruby.zigzo.com/2013/02/24/ydd-guidelines-yolo-driven-development)
 
-**Architecture** : Classical Service Oriented Architecture (SOA)
+**Libs**
 
-**libs**
-
- - expressjs : Fast minimalist web framework - [http://expressjs.com](http://expressjs.com)
- - Async.js : Async utilities - [https://github.com/caolan/async](https://github.com/caolan/async)
- - Underscorejs : Utility-belt library - [http://underscorejs.org](http://underscorejs.org)
+ - [expressjs](http://expressjs.com) : Fast minimalist web framework
+ - [Async.js](https://github.com/caolan/async) : Async utilities
+ - [Underscorejs](http://underscorejs.org) : Utility-belt library
 
 #### Database
 
-Using **Redis** : Open-source key-value database (cache and store)
-
-[http://redis.io/](http://redis.io/)
+Using [Redis](http://redis.io) : Open-source key-value database (cache and store)
 
 **Redis keys structure :**
 ```
