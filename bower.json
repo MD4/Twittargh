@@ -50,10 +50,11 @@
     "core-component-page": "master",
     "core-focusable": "master",
     "core-a11y-keys": "master",
-    "webcomponentsjs": "master",
+    "webcomponentsjs": "^0.5",
     "core-meta": "master",
     "core-iconset": "master",
     "core-input": "master",
-    "core-style": "master"
+    "core-style": "master",
+    "font-roboto": "master"
   }
 }
