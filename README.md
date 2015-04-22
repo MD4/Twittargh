@@ -21,7 +21,7 @@
 
 ### Tests
 
-- Usernames : `joker, dvado, kfrueger, jtorrance, mcorleone, hlecter, ca`
+- Usernames : `joker, dvador, kfrueger, jtorrance, mcorleone, hlecter, ca`
 - Password : `password`
 
 ## Features
@@ -44,7 +44,7 @@
   - [x] Tweet list from hashtag name
   - [x] Tweet propagation to hashtag
 - [ ] Be a twitter competitor
-  - [x] Be amazingly foolproof 
+  - [x] Be amazingly foolproof (Yes. Really.)
   - [ ] Make huge amount of money
 
 ## Documentation
