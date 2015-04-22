@@ -12,7 +12,7 @@
 
 ### Installation
 
-- Clone the repo: `git clone https://github.com/MD4/Twittargh.git`.
+- Clone the repo: `git clone https://github.com/MD4/Twittargh.git`
 - Install dependencies with `npm install`
 - Start your local redis server
 - Start the app with `npm start`
