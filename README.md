@@ -1,5 +1,5 @@
 # Twittargh
-> Small twitter clone !
+> Small twitter clone using Node.js, Polymer & Redis !
 
 ## Table of contents
 
@@ -14,7 +14,8 @@
 
 - Clone the repo: `git clone https://github.com/MD4/Twittargh.git`.
 - Install dependencies with `npm install`
-- Start with `npm start`
+- Start your local redis server
+- Start the app with `npm start`
 - Go to [http://localhost:3000](http://localhost:3000)
 - Take a coffee
 
@@ -48,7 +49,49 @@
 
 ## Documentation
 
-> Comming soon
+### Front end
+
+Written with Polymer : Web Components oriented frnt-end architecture
+
+[https://www.polymer-project.org](https://www.polymer-project.org)
+
+### Back-end
+
+#### API (REST)
+
+Written with Node.js : Javascript platform
+
+[https://nodejs.org](https://nodejs.org)
+
+Architecture : Classical Service Oriented Architecture (SOA)
+
+#### Database
+
+Using Redis : Open-source key-value database (cache and store)
+
+Redis keys structure :
+```
+db0
+├── tweets
+│   ├── data
+│   │   └── <tweet id> : HASH
+│   ├── hashtags
+│   │   └── <hashtag name> : ZSET<tweet id,timestamp>
+│   └── users
+│       └── <user username> : ZSET<tweet id,timestamp>
+├── users
+│   └── <user username> : HASH
+│   ├── followers
+│   │   └── <user username> : SET<user username>
+│   ├── following
+│   │   └── <user username> : SET<user username>
+│   └── walls
+│       └── <user username> : ZSET<tweet id,timestamp>
+└── sess
+    └── <session id> : STRING
+```
+
+[http://redis.io/](http://redis.io/)
 
 ## Copyright and license
 
