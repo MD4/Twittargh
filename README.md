@@ -69,6 +69,8 @@ Architecture : Classical Service Oriented Architecture (SOA)
 
 Using Redis : Open-source key-value database (cache and store)
 
+[http://redis.io/](http://redis.io/)
+
 Redis keys structure :
 ```
 db0
@@ -90,8 +92,6 @@ db0
 └── sess
     └── <session id> : STRING
 ```
-
-[http://redis.io/](http://redis.io/)
 
 ## Copyright and license
 
