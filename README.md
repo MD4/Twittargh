@@ -51,46 +51,56 @@
 
 ### Front end
 
-Written with Polymer : Web Components oriented frnt-end architecture
+Written with **Polymer** : Web Components oriented frnt-end architecture
 
 [https://www.polymer-project.org](https://www.polymer-project.org)
+
+**libs**
+
+ - momentjs : Parse, validate, manipulate and display dates [http://momentjs.com](http://momentjs.com)
 
 ### Back-end
 
 #### API (REST)
 
-Written with Node.js : Javascript platform
+Written with **Node.js** : Javascript platform
 
 [https://nodejs.org](https://nodejs.org)
 
-Architecture : Classical Service Oriented Architecture (SOA)
+**Architecture** : Classical Service Oriented Architecture (SOA)
+
+**libs**
+
+ - expressjs : Fast minimalist web framework [http://expressjs.com](http://expressjs.com)
+ - Async.js : Async utilities [https://github.com/caolan/async](https://github.com/caolan/async)
+ - Underscorejs : Utility-belt library : [http://underscorejs.org](http://underscorejs.org)
 
 #### Database
 
-Using Redis : Open-source key-value database (cache and store)
+Using **Redis** : Open-source key-value database (cache and store)
 
 [http://redis.io/](http://redis.io/)
 
-Redis keys structure :
+**Redis keys structure :**
 ```
 db0
 ├── tweets
 │   ├── data
-│   │   └── <tweet id> : HASH
+│   │   └── <tweet id> : HASH (tweet data : content, date, owner...)
 │   ├── hashtags
-│   │   └── <hashtag name> : ZSET<tweet id,timestamp>
+│   │   └── <hashtag name> : ZSET<tweet id,timestamp> (tweets related to that hashtag)
 │   └── users
-│       └── <user username> : ZSET<tweet id,timestamp>
+│       └── <user username> : ZSET<tweet id,timestamp> (users tweets)
 ├── users
-│   └── <user username> : HASH
+│   └── <user username> : HASH (user data : username, password, firstname...)
 │   ├── followers
-│   │   └── <user username> : SET<user username>
+│   │   └── <user username> : SET<user username> (users followers)
 │   ├── following
-│   │   └── <user username> : SET<user username>
+│   │   └── <user username> : SET<user username> (users subscriptions)
 │   └── walls
-│       └── <user username> : ZSET<tweet id,timestamp>
+│       └── <user username> : ZSET<tweet id,timestamp> (tweets on the users walls)
 └── sess
-    └── <session id> : STRING
+    └── <session id> : STRING (current express sessions)
 ```
 
 ## Copyright and license
