@@ -57,7 +57,7 @@ Written with **Polymer** : Web Components oriented frnt-end architecture
 
 **libs**
 
- - momentjs : Parse, validate, manipulate and display dates [http://momentjs.com](http://momentjs.com)
+ - momentjs : Parse, validate, manipulate and display dates - [http://momentjs.com](http://momentjs.com)
 
 ### Back-end
 
@@ -71,9 +71,9 @@ Written with **Node.js** : Javascript platform
 
 **libs**
 
- - expressjs : Fast minimalist web framework [http://expressjs.com](http://expressjs.com)
- - Async.js : Async utilities [https://github.com/caolan/async](https://github.com/caolan/async)
- - Underscorejs : Utility-belt library : [http://underscorejs.org](http://underscorejs.org)
+ - expressjs : Fast minimalist web framework - [http://expressjs.com](http://expressjs.com)
+ - Async.js : Async utilities - [https://github.com/caolan/async](https://github.com/caolan/async)
+ - Underscorejs : Utility-belt library - [http://underscorejs.org](http://underscorejs.org)
 
 #### Database
 
