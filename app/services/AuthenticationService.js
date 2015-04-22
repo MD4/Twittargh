@@ -26,7 +26,7 @@ var getAuthentication = function (session, callback) {
 };
 
 /**
- * Initialize the user sessoin
+ * Initialize the user session
  * @param session  User session
  * @param authentication User authentication
  */

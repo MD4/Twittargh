@@ -49,11 +49,6 @@ function initializeUsers() {
             lastname: "Frueger"
         },
         {
-            username: "pgonzales",
-            firstname: "Pedro",
-            lastname: "GONZALES"
-        },
-        {
             username: "dvador",
             firstname: "Dark",
             lastname: "VADOR"
@@ -78,6 +73,14 @@ function initializeUsers() {
         content: "Si ! Me gusta la cucaracha ! #cucaracha"
     }, function () {
     });
+    TweetService.createTweet("dvador", {
+        content: "HHHHHHHHHHP KCHOOOOOOOOO #breath #pneumonitis"
+    }, function () {
+    });
+    TweetService.createTweet("kfrueger", {
+        content: "TCHAK TCHAK TCHAK ! #razor AHAHAHA ! #lol #kill"
+    }, function () {
+    });
     TweetService.createTweet("hlecter", {
         content: "YARRHG ! I'LL KILL YA ! #argh #kill"
     }, function () {
@@ -87,11 +90,19 @@ function initializeUsers() {
     }, function () {
     });
     TweetService.createTweet("hlecter", {
-        content: "GRRRR ! AAARRRHHH ! GRAAAAAARRGH ! #argh"
+        content: "GRRRR ! AAARRRHHH ! GRAAAAAARRGH ! #breath #argh"
+    }, function () {
+    });
+    TweetService.createTweet("ca", {
+        content: "WOOT WOOT ! #woot #lol #mdr"
+    }, function () {
+    });
+    TweetService.createTweet("dvador", {
+        content: "Luke. I AM your father ! #family #issues"
     }, function () {
     });
     TweetService.createTweet("jtorrance", {
-        content: "Where did I put my axe ? #redrum"
+        content: "Where did I put my axe ? #redrum #issues"
     }, function () {
     });
     TweetService.createTweet("joker", {
@@ -113,6 +124,24 @@ function initializeUsers() {
     UserService.follow("joker", "mcorleone", function () {
     });
     UserService.follow("mcorleone", "joker", function () {
+    });
+    UserService.follow("dvador", "mcorleone", function () {
+    });
+    UserService.follow("dvador", "jtorrance", function () {
+    });
+    UserService.follow("dvador", "hlecter", function () {
+    });
+    UserService.follow("dvador", "kfrueger", function () {
+    });
+    UserService.follow("kfrueger", "hlecter", function () {
+    });
+    UserService.follow("kfrueger", "mcorleone", function () {
+    });
+    UserService.follow("ca", "dvador", function () {
+    });
+    UserService.follow("ca", "jtorrance", function () {
+    });
+    UserService.follow("ca", "kfrueger", function () {
     });
 
 }
