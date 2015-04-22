@@ -55,7 +55,7 @@ Written with **Polymer** : Web Components oriented frnt-end architecture
 
 [https://www.polymer-project.org](https://www.polymer-project.org)
 
-**libs**
+**Libs**
 
  - momentjs : Parse, validate, manipulate and display dates - [http://momentjs.com](http://momentjs.com)
 
@@ -69,7 +69,7 @@ Written with **Node.js** : Javascript platform
 
 **Architecture** : Classical Service Oriented Architecture (SOA)
 
-**libs**
+**Libs**
 
  - expressjs : Fast minimalist web framework - [http://expressjs.com](http://expressjs.com)
  - Async.js : Async utilities - [https://github.com/caolan/async](https://github.com/caolan/async)
