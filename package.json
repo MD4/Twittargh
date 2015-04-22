@@ -4,6 +4,7 @@
   "description": "Small twitter clone !",
   "main": "app/main.js",
   "scripts": {
+    "preinstall": "bower install",
     "start": "node app/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
