@@ -16,7 +16,6 @@ var authenticationFilter = ["username", "firstname", "lastname", "following"];
  */
 var getAuthentication = function (session, callback) {
     if (!session.authentication) return new Errors.AuthenticationError();
-    console.log(session.authentication);
     UserService.findOne(session.authentication.username, function (err, user) {
         if (err) return callback(err);
         if (!user) return callback(new Errors.AuthenticationError());

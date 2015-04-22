@@ -68,7 +68,6 @@ Server.prototype.route = function (routes) {
             controller[route.functionName](req, res, function (err, result) {
                 if (err) {
                     res.statusCode = err.code;
-                    console.log(err);
                     res.send(err);
                 } else {
                     res.statusCode = 200;
